@@ -6,10 +6,7 @@ namespace Chef
 {
     class Tomatoe : Vegetable
     {
-        private int weight;
-        public double calories { get; }
-        private string colour;
-
+        
         public Tomatoe()
         {
             Random rand = new Random();
@@ -27,7 +24,7 @@ namespace Chef
 
         public override double Calories(int weight)
         {
-            return weight/100.0*18.0;
-        }
+            return Math.Round(weight/100.0*18.0, 2);
+        }       
     }
 }
