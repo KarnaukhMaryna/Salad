@@ -9,7 +9,7 @@ namespace Chef
             Tomatoe t1 = new Tomatoe(130);
             Tomatoe t2 = new Tomatoe();
             Cucumber c1 = new Cucumber();
-            Сabbage ca1 = new Сabbage();
+            Сabbage ca1 = new Сabbage(129);
             Onion o1 = new Onion(50);
             Carrot ct1 = new Carrot();
 
@@ -30,23 +30,12 @@ namespace Chef
 
             salad.RemoveAt(2);
 
-            foreach (var s in salad)
+            Console.WriteLine("");
+            SaladCollection salad2 = SaladCollection.ColourFilter(salad, "red");
+            foreach (var s in salad2)
             {
                 Console.WriteLine(s);
             }
-
-            Console.WriteLine("");
-            Console.WriteLine("Vegetables in salad witch weight over 150 gram:");
-            SaladCollection.ListOver150Gram(salad);
-
-            Console.WriteLine("");
-            Console.WriteLine("Vegetables in salad witch color is red:");
-            string c = "red";
-            SaladCollection.ListOfColor(salad, c);
-
-            Console.WriteLine("");
-            Console.WriteLine("Vegetables in salad witch calories under 40:");
-            SaladCollection.ListUnder40Calories(salad);
         }
 
     }
