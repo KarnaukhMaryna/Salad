@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="D:\Project\Salad\Chef\Chef\Program.cs" Link="Program.cs" />
+  </ItemGroup>
+
 </Project>
