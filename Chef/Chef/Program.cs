@@ -21,22 +21,19 @@ namespace Chef
             salad.Add(o1);
             salad.Add(ct1);
 
-            foreach (var s in salad)
-            {
-                Console.WriteLine(s);
-            }
+            SaladCollection.OutputOnDisplay(salad);
 
-            salad.CaloriesInSalad();
+            Console.Write("Calories in salad:");
+            Console.WriteLine(Math.Round(salad.CaloriesInSalad(),2));
 
-            salad.RemoveAt(2);
+            salad.RemoveAt(2);          
 
-            Console.WriteLine("");
-            SaladCollection salad2 = SaladCollection.ColourFilter(salad, "red");
-            foreach (var s in salad2)
-            {
-                Console.WriteLine(s);
-            }
+            SaladCollection saladFilter = SaladCollection.ColourFilter(salad, "red");
+            SaladCollection.OutputOnDisplay(saladFilter);
+
+            saladFilter = SaladCollection.CaloriesFilter(salad, 50.00);
+            SaladCollection.OutputOnDisplay(saladFilter);
+
         }
-
     }
 }

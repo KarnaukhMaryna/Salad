@@ -8,18 +8,27 @@ namespace Chef
 {
     class SaladCollection : IEnumerable
     {
-        private IList List { get; }
+        private IList SaladArray { get;}
 
         public SaladCollection()
         {
-            List = new ArrayList();
+            SaladArray = new ArrayList();
+        }
+
+        public SaladCollection(IEnumerable saladCollection)
+        {
+            SaladArray = new ArrayList();
+            foreach (Vegetable item in saladCollection)
+            {
+                SaladArray.Add(item);
+            }
         }
 
         public int Count 
         {
             get 
             { 
-                return List.Count; 
+                return SaladArray.Count; 
             } 
         }
 
@@ -27,42 +36,42 @@ namespace Chef
         {
             for (int index = 0; index < Count; index++) 
             { 
-                yield return List[index]; 
+                yield return SaladArray[index]; 
             } 
         }
         
         public int Add(Vegetable vegetable) 
         { 
-            return List.Add(vegetable);
+            return SaladArray.Add(vegetable);
         }
 
         public void RemoveAt(int index) 
-        { 
-            List.RemoveAt(index); 
+        {
+            SaladArray.RemoveAt(index); 
         }
 
         public void Remove(Vegetable vegetable) 
-        { 
-            List.Remove(vegetable); 
+        {
+            SaladArray.Remove(vegetable); 
         }
 
-        public void CaloriesInSalad()
+        public double CaloriesInSalad()
         {
-            double Sum = 0;
-            foreach( Vegetable l in List)
+            double saladCalories = 0;
+            foreach( Vegetable l in SaladArray)
             {
-                Sum += l.calories;
+                saladCalories += l.calories;
             }
-            Console.WriteLine("{0} calories in salad", Math.Round(Sum, 2));
+            return saladCalories;
         }
 
         public static SaladCollection WeightFilter(SaladCollection Vegetables, double weight)
         {
             var NewCollection = from Vegetable vegetable in Vegetables
-                                where  vegetable.weight > weight
-                           orderby vegetable.weight descending
-                           select vegetable;
-            return (SaladCollection)NewCollection;
+                                where vegetable.weight > weight
+                                orderby vegetable.weight descending
+                                select vegetable;
+            return new SaladCollection(NewCollection);
         }
 
         public static SaladCollection ColourFilter(SaladCollection Vegetables, string colour)
@@ -70,18 +79,24 @@ namespace Chef
             var NewCollection = from Vegetable vegetable in Vegetables
                            where vegetable.colour == colour
                            select vegetable;
-            return (SaladCollection)NewCollection;
+            return new SaladCollection(NewCollection);
         }
 
         public static SaladCollection CaloriesFilter(SaladCollection Vegetables, double calories)
         {
             var NewCollection = from Vegetable vegetable in Vegetables
-                           where vegetable.calories > calories
-                           orderby vegetable.calories descending
-                           select vegetable;
-            return (SaladCollection)NewCollection;
+                                where vegetable.calories > calories
+                                orderby vegetable.calories descending
+                                select vegetable;
+            return new SaladCollection(NewCollection);
+        }
 
-
+        public static void OutputOnDisplay(SaladCollection SaladArray)
+        {
+            foreach (var vegetable in SaladArray)
+            {
+                Console.WriteLine(vegetable);
+            }
         }
 
     }
